@@ -5,7 +5,8 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var content={
+var articles={
+    'article-one':{
     title: 'article-one',
     heading: 'article one',
     date: 'feb 5,2017',
@@ -18,8 +19,26 @@ var content={
             <p>
                 this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.this isthe content for my article.
             </p>`
+},
+    'article-two':{
+        
+    title: 'article-two',
+    heading: 'article two',
+    date: 'feb 5,2017',
+    content: `  <p>
+                     this is the content for second article. 
+                </p>`
+    },
+    'article-three':{
+                
+    title: 'article-three',
+    heading: 'article three',
+    date: 'feb 21,2017',
+    content: `  <p>
+                     this is the content for third article. 
+                </p>`
+    },
 };
-
 
 function createTemplate(data){
     var title = data.title;
@@ -60,22 +79,25 @@ return htmlTemplate;
 }
 
 app.get('/', function (req, res) {
-  res.send(createTemplate(articleOne));
-});
-app.get('/article-one',function(req,res){
-res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+        res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+        
 });
 
-app.get('/article-two',function(req,res){
-res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
+app.get('/:articleName',function(req,res){
+    var articleName = req.params.articleName;
+    res.send(createTemplate(articles[articleName]));
 });
 
 // app.get('/article-two',function(req,res){
-//     res.send('article-two is requested and will be served here');
+// res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
 // });
-app.get('/article-three',function(req,res){
-res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
+
+// // app.get('/article-two',function(req,res){
+// //     res.send('article-two is requested and will be served here');
+// // });
+// app.get('/article-three',function(req,res){
+// res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+// });
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
