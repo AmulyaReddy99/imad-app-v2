@@ -40,14 +40,13 @@ var articles={
     },
 };
 
-function createTemplate(data){
-    var title = data.title;
-    var date = data.date;
-    var heading = data.headig;
-    var ontent = data.content;
+function createTemplate (data) {
+   var title = data.title;
+   var date = data.date;
+   var heading = data.headig;
+   var content = data.content;
     
     var htmlTemplate = `
-<!doctype html>
 <html>
     <head>
         <title>
@@ -79,25 +78,29 @@ return htmlTemplate;
 }
 
 app.get('/', function (req, res) {
-        res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+    res.sendFile(path.join(__dirname, 'ui', 'index.html'));
         
 });
 
-app.get('/:articleName',function(req,res){
-    var articleName = req.params.articleName;
-    res.send(createTemplate(articles[articleName]));
+// app.get('/:articleName',function(req,res){
+//     var articleName = req.params.articleName;
+//     res.send(createTemplate(articles[articleName]));
+// });
+
+app.get('/article-one',function(req,res){
+res.send(createTemplate(article-one));
+});
+
+app.get('/article-two',function(req,res){
+res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
 });
 
 // app.get('/article-two',function(req,res){
-// res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
+//     res.send('article-two is requested and will be served here');
 // });
-
-// // app.get('/article-two',function(req,res){
-// //     res.send('article-two is requested and will be served here');
-// // });
-// app.get('/article-three',function(req,res){
-// res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-// });
+app.get('/article-three',function(req,res){
+res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
