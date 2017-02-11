@@ -1,11 +1,24 @@
 // //counter code
 
 var button = document.getElementById('counter');
-var counter = 0;
+
 button.onclick = function(){
-    counter+=1;
-    var span = document.getElementById('count');
-    span.innerHTML=counter.toString();
+    //create request to the counter endpoint
+    var request = new XMLHttpRequest();
+    
+    //capture the response and store the response in a variable
+    reqest.onreadystatechange = function(){
+        if(request.readystate === XMLHttpRequest.DONE){
+            if(request.status === 200){
+                var counter = request.resposeText;
+             var span = document.getElementById('count');
+              span.innerHTML=counter.toString();
+            }
+        } 
+    };
+    //make the request
+    request.open('GET','http://amulyareddy99.imad.hasura-app.io/counter',true);
+    request.send(null);
 };
 
 // console.log('Loaded!');
