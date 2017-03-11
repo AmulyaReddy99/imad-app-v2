@@ -16,7 +16,23 @@ app.use(morgan('combined'));
 
 var articles={
     'article-one':{
- 
+        title: 'articleOne | Amulya Reddy',
+        heading: 'article one',
+        date: 'feb 5,2017',
+        content: `
+            <p>
+                this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one.
+            </p>
+            
+            <p>
+                this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one.
+            </p>
+
+            <p>
+                this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one. this is in article-one.
+            </p>`
+
+    },
     'article-two':{
         
     title: 'articleTwo',
