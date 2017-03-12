@@ -14,7 +14,7 @@ button.onclick = function(){
                     names = JSON.parse(names);
                     var list='';
                     for(var i=0;i<names.length;i++){
-                      list+= '<li>' + names[i] + '</li>';
+                      list += '<li>' + names[i] + '</li>';
                     }
                     var ul = document.getElementById('namelist');
                     ul.innerHTML = list;
@@ -22,7 +22,7 @@ button.onclick = function(){
                 } 
             };
     //make the request
-    request.open('GET','http://amulyareddy99.imad.hasura-app.io/submit-name?='+ name ,true);
+    request.open('GET','http://amulyareddy99.imad.hasura-app.io/submit-name?='+ name,true);
     request.send(null);
 };
 
