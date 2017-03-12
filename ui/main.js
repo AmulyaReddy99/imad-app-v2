@@ -32,7 +32,7 @@ submit.onclick = function(){
       list+= '<li>' + names[i] + '</li>';
     }
     var ul = document.getElementById('namelist');
-    ui.innerHTML = list;
+    ul.innerHTML = list;
 }
 
 // var button = document.getElementById('counter');
