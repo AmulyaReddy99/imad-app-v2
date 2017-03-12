@@ -28,6 +28,8 @@ button.onClick = function(){
     var span = document.getElementById('count');
     span.innerHTML = counter.toString();
 };
+
+
 // //submit name
 // var nameInput=document.getElementById('name');
 // var name=nameInput.vlaue; 
