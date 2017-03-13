@@ -122,7 +122,7 @@ app.get('/submit-name/:name', function (req, res) {
     res.send(JSON.stringify(names));
 }); 
 
-app.get('/article/:articleName',function(req,res){
+app.get('/articles/:articleName',function(req,res){
 //   var articleName = req.params.articleName;
 //   res.send(createTemplaate(articles[articleName]));
 // });
