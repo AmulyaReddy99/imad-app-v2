@@ -22,22 +22,29 @@ button.onclick = function(){
                 } 
             };
     //make the request
-    request.open('GET','http://amulyareddy99.imad.hasura-app.io/submit-name?='+ name,true);
+    var nameInput = document.getElementById('name');
+    var name = nameInput.vlaue; 
+    request.open('GET','http://amulyareddy99.imad.hasura-app.io/submit-name?name='+ name,true);
     request.send(null);
+    
 };
 
 //submit name
-var nameInput = document.getElementById('name');
-var name = nameInput.vlaue; 
-var submit = document.getElementById('submit_btn');
-submit.onclick = function(){
-    var names = ['name1','name2','name3','name4'];
-    var list = '';
-    for(var i=0; i<names.length ; i++){
-        list+='<li>' + names[i] + '</li>';
-    }
-    var ul = document.getElementById('namelist');
-};
+// var submit = document.getElementById('submit_btn');
+// submit.onclick = function(){
+//     var names = request.responseText;
+//     names = JSON.parse(names);
+//     var list = '';
+//     for(var i=0; i<names.length ; i++){
+//         list+='<li>' + names[i] + '</li>';
+//     }
+//     var ul = document.getElementById('namelist');
+//     var nameInput = document.getElementById('name');
+//     var name = nameInput.vlaue; 
+//     request.open('GET','http://amulyareddy99.imad.hasura-app.io/submit-name?name='+ name,true);
+//     request.send(null);
+
+// };
 
 // var button = document.getElementById('counter');
 // var counter = 0;
