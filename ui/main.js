@@ -16,15 +16,15 @@ submit.onclick = function(){
             } else if(request.status == 500){
                 alert('something went wrong on the server');
             }
-                    }
-                } 
-            };
+    } 
+};
     //make the request
     var username = document.getElementById('username');
     var password = document.getElementById('password');
     console.log(username);
 
     request.open('POST','http://amulyareddy99.imad.hasura-app.io/login',true);
+    request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username:"username", password:"password"}));
     
 };
