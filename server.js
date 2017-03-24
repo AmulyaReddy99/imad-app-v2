@@ -58,50 +58,50 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-function hash(input,salt){
-    var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
-    return ["pbkdf2", "10000", salt, hashed.toString('hex')].join('$');
-}
+// function hash(input,salt){
+//     var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
+//     return ["pbkdf2", "10000", salt, hashed.toString('hex')].join('$');
+// }
 
-app.get('/hash/:input', function (req, res){
-    var hashedString = hash(req.params.input,'this_is_hashed_string');
-    res.send(hashedString);
-});
+// app.get('/hash/:input', function (req, res){
+//     var hashedString = hash(req.params.input,'this_is_hashed_string');
+//     res.send(hashedString);
+// });
 
-app.post('/create-user',function(rq,res){
-    var username = req.body.username;
-    var password = req.body.password;
-    var salt = crypto.randomBytes(128).toString('hex');
-    var dbString = hash(password, salt);
-    pool.query('INSERT INTO "user" (username, password) VALUES ($1,$2)', [username,dbString] ,function(err,result){
-       if(err){
-            res.status(500).send(err.toString());
-        }   else {
-            res.send('user sucessfully created: '+ username);
-        }  
-    });
-});
-app.post('/login',function(rq,res){
-    var username = req.body.username;
-    var password = req.body.password;
-    pool.query('SELECT * FROM "user" WHERE username = $1', [username] ,function(err,result){
-       if(err){
-            res.status(500).send(err.toString());
-        } else { if(result.rows.length === 0) 
-                 res.send(403).send('username/password is invalid ');
-        else {
-            var dbString = result.row[0].password;
-            var salt = dbString.split('$')[2];
-            var hashedPassword = hash(password,salt);
-            if(hashedPassword === dbString){
-                res.send('credentials are correct! ');
-            } else {
-                res.send(403).send('username/password is invalid ');
-            }
-          }
-        }
-    });
-});
+// app.post('/create-user',function(rq,res){
+//     var username = req.body.username;
+//     var password = req.body.password;
+//     var salt = crypto.randomBytes(128).toString('hex');
+//     var dbString = hash(password, salt);
+//     pool.query('INSERT INTO "user" (username, password) VALUES ($1,$2)', [username,dbString] ,function(err,result){
+//       if(err){
+//             res.status(500).send(err.toString());
+//         }   else {
+//             res.send('user sucessfully created: '+ username);
+//         }  
+//     });
+// });
+// app.post('/login',function(rq,res){
+//     var username = req.body.username;
+//     var password = req.body.password;
+//     pool.query('SELECT * FROM "user" WHERE username = $1', [username] ,function(err,result){
+//       if(err){
+//             res.status(500).send(err.toString());
+//         } else { if(result.rows.length === 0) 
+//                  res.send(403).send('username/password is invalid ');
+//         else {
+//             var dbString = result.row[0].password;
+//             var salt = dbString.split('$')[2];
+//             var hashedPassword = hash(password,salt);
+//             if(hashedPassword === dbString){
+//                 res.send('credentials are correct! ');
+//             } else {
+//                 res.send(403).send('username/password is invalid ');
+//             }
+//           }
+//         }
+//     });
+// });
 
 var pool = new Pool(config);
 app.get('/test-db', function (req, res) {
