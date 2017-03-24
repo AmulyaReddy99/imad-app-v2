@@ -9,7 +9,13 @@ submit.onclick = function(){
     request.onreadystatechange = function(){
         if(request.readyState === XMLHttpRequest.DONE){
             if(request.status === 200){
-                    
+                alert('logged in successfully');
+                
+            } else if(request.status == 403){
+                 alert('username/password is incorrect');
+            } else if(request.status == 500){
+                alert('something went wrong on the server');
+            }
                     }
                 } 
             };
@@ -17,8 +23,7 @@ submit.onclick = function(){
     var username = document.getElementById('username');
     var password = document.getElementById('password');
     console.log(username);
-    console.log(password);
-    var name = nameInput.vlaue; 
+
     request.open('POST','http://amulyareddy99.imad.hasura-app.io/login',true);
     request.send(JSON.stringify({username:"username", password:"password"}));
     
