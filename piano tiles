@@ -1,0 +1,72 @@
+/*
+ * File: Adventure.java
+ * Names: <fill in>
+ * Section leader who is grading the assignment: <fill in>
+ * -------------------------------------------------------
+ * This program plays the Adventure game from Assignment #6.
+ */
+
+import acm.graphics.GImage;
+import acm.graphics.GLabel;
+import acm.graphics.GObject;
+import acm.io.*;
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.event.MouseEvent;
+import java.io.*;
+import java.util.*;
+import acm.graphics.GRect;
+
+/**
+ * This class is the main program class for the Adventure game.
+ * In the final version, <code>Adventure</code> should extend
+ * <code>ConsoleProgram</code> directly.
+ */
+
+public class Adventure extends GraphicsProgram{ //AdventureMagicSuperclass {
+
+/**
+ * Runs the Adventure program.
+ */
+	public void run() {
+		//super.run();  // Replace with your code
+		for(int i=0; i<4; i++){
+			for(int j=0; j<4; j++){
+				boolean flag=rgen.nextBoolean();
+				tile = new GRect(getWidth()/4,getHeight()/4);
+					tile.setFilled(flag);
+					add(tile,i*getWidth()/4,j*getHeight()/4*movefactor);
+			}
+		}
+		addMouseListeners();
+	}
+	
+public void mouseClicked(MouseEvent e){
+	GObject obj = getElementAt(e.getX(),e.getY());
+	if(((GRect) obj).isFilled()){
+		((GRect) obj).setFilled(false);
+		x = obj.getY() + getHeight()/4;
+		y += getHeight()/4;
+		if(x>y){
+			removeAll();
+			GLabel lost1 = new GLabel("Victory! ",getWidth()/2-12, getHeight()/2);
+			add(lost1);
+		}
+		movefactor++;
+	}
+	else {
+		removeAll();
+		GLabel lost = new GLabel("Victory! ",getWidth()/2-12, getHeight()/2);
+		add(lost);
+	}
+}
+
+// Add your own private methods and instance variables here
+	private RandomGenerator rgen = RandomGenerator.getInstance();
+	private double x=0;
+	private double y=0;
+	private double movefactor=1;
+	private GRect tile;
+	private int counter;
+}
